@@ -4,7 +4,9 @@ import './App.css';
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false)
 
+try{
   const hendelLogin = async (e) => {
     e.preventDefault();
     console.log(email, ' ', password);
@@ -17,6 +19,11 @@ function App() {
       }
     );
   };
+}catch(error){
+  if(!error?.response){
+    setError(true)
+  }
+}
 
   return (
     <>

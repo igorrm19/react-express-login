@@ -2,7 +2,7 @@ const express = require('express');
 
 const routes = express.Router();
 
-const users = [
+const users = [ 
   {
     id: 1,
     name: 'Igor',
