@@ -2,31 +2,38 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('')
+  const [email, setEmail] = useState(''); //correto
+  const [password, setPassword] = useState(''); //correto
+  const [mens, setMens] = useState('');
 
-try{
+
   const hendelLogin = async (e) => {
     e.preventDefault();
     console.log(email, ' ', password);
 
-    const response = await axios.post(
-      'http://localhost:3000/login',
-      JSON.stringify({ email, password }),
-      {
-        Headers: { 'Content-Type': 'application/json' },
+    try{
+      const resposta = await fetch('http://localhost:3000/login', 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(email, password),
+        }
+      );
+    
+      const data = await resposta.json();
+      if(resposta.ok){
+          setMens(`Login bem sucedido ${data.name}`);
+      }else{
+        setMens(data.mens)
       }
-    );
-  };
-}catch(error){
-  e.preventDefault();
-  if(!error?.response){
-    setError('Aconteceu um erro no servidor')
-  }else if(error.response.status == 401){
-    setError('Erro de senha ou email')
+
+    }catch(error){
+      console.error('Erro na conexão', error);
+      setMens('Erro ao tentar fazer Login')
+    }
   }
-}
 
   return (
     <>
@@ -51,10 +58,12 @@ try{
               setPassword(e.target.value);
             }}
           ></input>
-
+           
          <button name="submit" type="submit" onClick={(e) => hendelLogin(e) }>Enviar</button>
         </form>
-        <p>{error}</p>
+        
+        <p>{mens}</p>
+
       </main>
     </>
   );

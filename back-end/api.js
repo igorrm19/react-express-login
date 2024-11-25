@@ -11,7 +11,9 @@ App.use(Routes);
 App.get('/', (res, req) => {
   const { email, password } = req.body;
   res.send(email);
+  console.log(email)
 });
+
 
 App.listen(3000, () => {
   console.log('Deu certo na porta ' + 3000);
