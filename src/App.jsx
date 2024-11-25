@@ -9,7 +9,7 @@ function App() {
 
   const hendelLogin = async (e) => {
     e.preventDefault();
-    console.log(email, ' ', password);
+    console.log(email, password);
 
     try{
       const resposta = await fetch('http://localhost:3000/login', 
@@ -18,14 +18,16 @@ function App() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(email, password),
+          body: JSON.stringify({email, password}),
         }
       );
     
       const data = await resposta.json();
       if(resposta.ok){
+          console.log('certo')
           setMens(`Login bem sucedido ${data.name}`);
       }else{
+        console.log('errado')
         setMens(data.mens)
       }
 

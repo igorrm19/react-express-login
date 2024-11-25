@@ -4,13 +4,19 @@ const Routes = require('./routes');
 const cors = require('cors')
 const App = express();
 
-App.use(express.json);
+App.use(express.json());
 App.use(cors())
-App.use(Routes);
+App.use('/login',Routes);
+
+
+App.use((req, res, next) => {
+  console.log('Body recebido', req.body);
+  next();
+})
 
 App.get('/', (res, req) => {
   const { email, password } = req.body;
-  res.send(email);
+  res.send(email, 'Servidor funcionando');
   console.log(email)
 });
 
