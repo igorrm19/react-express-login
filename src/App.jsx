@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
 
 try{
   const hendelLogin = async (e) => {
@@ -20,8 +20,11 @@ try{
     );
   };
 }catch(error){
+  e.preventDefault();
   if(!error?.response){
-    setError(true)
+    setError('Aconteceu um erro no servidor')
+  }else if(error.response.status == 401){
+    setError('Erro de senha ou email')
   }
 }
 
@@ -49,10 +52,9 @@ try{
             }}
           ></input>
 
-          <button name="submit" type="submit" onClick={(e) => hendelLogin(e)}>
-            Enviar
-          </button>
+         <button name="submit" type="submit" onClick={(e) => hendelLogin(e) }>Enviar</button>
         </form>
+        <p>{error}</p>
       </main>
     </>
   );
