@@ -15,7 +15,7 @@ App.use((req, res, next) => {
 })
 
 App.get('/', (res, req) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   res.send(email, 'Servidor funcionando');
   console.log(email)
 });
