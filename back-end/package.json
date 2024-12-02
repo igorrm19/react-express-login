@@ -5,13 +5,15 @@
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon back-end/api.js"
+    "dev": "nodemon back-end/api.js",
+    "start": "node api.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "vite": "^4.5.5"
   }
 }

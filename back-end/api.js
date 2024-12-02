@@ -18,7 +18,7 @@ App.get('/', (res, req) => {
   const { email, password, name } = req.body;
   res.send(email, 'Servidor funcionando');
   console.log(email)
-});
+}); 
 
 
 App.listen(3000, () => {
